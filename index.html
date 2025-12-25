@@ -12,6 +12,9 @@
     <meta property="og:description" content="Aspiring Software Developer with a passion for education and digital literacy.">
     <meta property="og:type" content="website">
     
+    <!-- Favicon using the same SVG logo -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='hsl(220,15%,8%)'/><path d='M30 50L50 25L70 50L50 75Z' stroke='hsl(45,80%,55%)' stroke-width='3' fill='none'/></svg>">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
@@ -116,7 +119,7 @@
             position: relative;
         }
 
-        /* ========== Navigation ========== */
+        /* ========== Navigation & Logo ========== */
         .navbar {
             position: fixed;
             top: 0;
@@ -153,17 +156,41 @@
         .logo-image {
             height: 35px;
             width: auto;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.2));
+            animation: fadeInLogo 0.8s ease-out;
         }
 
         .logo:hover .logo-image {
             transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
+        }
+
+        .logo:hover .logo-image circle {
+            stroke: hsl(45, 80%, 55%);
+            stroke-opacity: 0.5;
+        }
+
+        .logo:hover .logo-image path {
+            stroke: hsl(45, 90%, 65%);
+            stroke-width: 3.2;
+        }
+
+        .logo:hover .logo-image circle[fill="hsl(45, 80%, 55%)"] {
+            fill: hsl(45, 90%, 65%);
+            r: 2.5;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInLogo {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 480px) {
             .logo-image {
                 height: 30px;
+                width: 30px;
             }
         }
 
@@ -865,7 +892,26 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="logo.png" alt="Butrus Homepage" class="logo-image">
+                <svg class="logo-image" width="35" height="35" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="hsl(220, 15%, 8%)"/>
+                    <circle cx="50" cy="50" r="45" stroke="hsl(45, 30%, 20%)" stroke-width="1.5" stroke-opacity="0.3"/>
+                    <path d="M30 50L50 25L70 50L50 75L30 50Z" 
+                          stroke="hsl(45, 80%, 55%)" 
+                          stroke-width="3" 
+                          fill="none"/>
+                    <path d="M37 35V65M37 35H42C44.5 35 46 36.5 46 39C46 41.5 44.5 43 42 43H37M37 43H42C44.5 43 46 44.5 46 47C46 49.5 44.5 51 42 51H37" 
+                          stroke="hsl(45, 80%, 55%)" 
+                          stroke-width="2.5" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                    <path d="M63 35V65M63 35H58C55.5 35 54 36.5 54 39V61C54 63.5 55.5 65 58 65H63" 
+                          stroke="hsl(45, 80%, 55%)" 
+                          stroke-width="2.5" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="2" fill="hsl(45, 80%, 55%)"/>
+                    <circle cx="50" cy="50" r="20" stroke="hsl(45, 80%, 55%)" stroke-width="0.5" stroke-opacity="0.3" fill="none"/>
+                </svg>
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#about">About</a>
@@ -1223,6 +1269,12 @@
                 icon.classList.add('fa-bars');
                 icon.classList.remove('fa-times');
             });
+        });
+
+        // Logo click scrolls to top
+        document.querySelector('.logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Smooth scrolling for anchor links
