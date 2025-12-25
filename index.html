@@ -144,13 +144,27 @@
         }
 
         .logo {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 700;
+            display: flex;
+            align-items: center;
+            height: 40px;
             text-decoration: none;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-image {
+            height: 35px;
+            width: auto;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.2));
+        }
+
+        .logo:hover .logo-image {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 480px) {
+            .logo-image {
+                height: 30px;
+            }
         }
 
         .nav-links {
@@ -850,7 +864,9 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Butrus.</a>
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Butrus Homepage" class="logo-image">
+            </a>
             <div class="nav-links" id="navLinks">
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
